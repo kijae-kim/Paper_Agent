@@ -14,11 +14,22 @@ echo "--- 1. 기존 빌드 정리 ---"
 rm -rf build dist
 
 echo "--- 2. py2app 빌드 ---"
-# Poetry 가상환경의 Python 사용
-PYTHON="$(cd .. && poetry env info --executable)"
-$PYTHON setup.py py2app 2>&1
+# Poetry venv를 직접 활성화해 서브프로세스에도 경로 유지
+VENV_PATH="$(cd "$SCRIPT_DIR/.." && poetry env info --path)"
+source "$VENV_PATH/bin/activate"
+cd "$SCRIPT_DIR"
+python setup.py py2app 2>&1
 
-echo "--- 3. 코드 서명 (APPLE_CERT_NAME 환경변수가 있을 때만) ---"
+echo "--- 3. dylib 서명 수정 ---"
+# py2app이 복사한 liblzma의 코드 서명이 깨지는 문제 수정
+FRAMEWORKS="dist/PDFChatbot.app/Contents/Frameworks"
+if [ -f "/opt/homebrew/lib/liblzma.5.dylib" ]; then
+  cp /opt/homebrew/lib/liblzma.5.dylib "$FRAMEWORKS/liblzma.5.dylib"
+  codesign --force --sign - "$FRAMEWORKS/liblzma.5.dylib"
+  echo "liblzma 교체 완료"
+fi
+
+echo "--- 4. 코드 서명 (APPLE_CERT_NAME 환경변수가 있을 때만) ---"
 if [ -n "$APPLE_CERT_NAME" ]; then
   echo "서명: $APPLE_CERT_NAME"
   codesign --deep --force --options runtime \
@@ -30,7 +41,7 @@ else
   echo "APPLE_CERT_NAME 미설정 — 서명 건너뜀"
 fi
 
-echo "--- 4. DMG 생성 ---"
+echo "--- 5. DMG 생성 ---"
 # icon.icns가 없으면 경고 후 계속
 ICON_ARG=""
 if [ -f "assets/icon.icns" ]; then

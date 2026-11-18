@@ -1,0 +1,55 @@
+{
+  "timestamp": "20260225_193801",
+  "pdf": "predicting_music.pdf",
+  "thresholds": {
+    "faithfulness": 0.8,
+    "answer_relevancy": 0.85
+  },
+  "scores": {
+    "faithfulness": 0.6518,
+    "answer_relevancy":  null
+  },
+  "passed": false,
+  "samples": [
+    {
+      "question": "What is the main contribution of this paper?",
+      "purpose": "Answer Relevancy — 논문 전반의 핵심 주장 파악",
+      "answer": "이 논문은 음악의 성공을 예측하는 데 사용되는 새로운 방법을 제안하고, 음악 데이터를 다양한 모달리티에서 분석하여 문화 시장에 대한洞察를 제공한다. 이 연구는 음악 회사에 도움이 될 수 있는 음악의 성공을 예측하기 전에 앨범의 출시 전에 성공적인 노래를 예측할 수 있는 지표를 제공한다. 또한, 이 논문은 미국 시장에 초점을 맞추며 음악 tastes가 evolve하는 nature와 지역 및 시장 context의 중요성을 강조한다.",
+      "contexts_count": 8,
+      "elapsed_sec": 15.3,
+      "error": ""
+    },
+    {
+      "question": "What Spotify audio features were used in this study?",
+      "purpose": "Faithfulness — 정확한 목록 열거, 환각(Hallucination) 탐지",
+      "answer": "Spotify의 음악 특성으로서 다음과 같은 특성이 사용되었다.\n\n* Acousticness : 악보가 아코스틱인지 여부를 나타내는 confidence(0-1)와 duration in milliseconds\n* Danceability : 댄스할 수 있는지 여부를 나타내는 suitability for dancing (0-1)\n* Energy : 에너지를 나타내는 intensity and activity measure (0-1)\n* Instrumentalness : 보컬이 없는지 여부를 나타내는 likelihood of no vocals (0-1)\n* Key : 트랙의 키를 나타내는 key (0-11)\n* Liveness : 공연에 참여한지 여부를 나타내는 presence of an audience (0-1)\n* Loudness : decibels (dB)",
+      "contexts_count": 8,
+      "elapsed_sec": 10.89,
+      "error": ""
+    },
+    {
+      "question": "What is the accuracy of the classification model?",
+      "purpose": "Context Precision — 특정 수치 검색",
+      "answer": "our model has overcome the previous methods in all criteria and surpasses previous models in both precision and reliability for predicting song popularity, achieving an F1 Score of 0.9779.",
+      "contexts_count": 8,
+      "elapsed_sec": 4.56,
+      "error": ""
+    },
+    {
+      "question": "What are the limitations of the deep learning model used in this paper?",
+      "purpose": "Faithfulness + Answer Relevancy — 비판적 분석",
+      "answer": "해당 정보를 문서에서 찾을 수 없습니다.",
+      "contexts_count": 7,
+      "elapsed_sec": 3.0,
+      "error": ""
+    },
+    {
+      "question": "What future research directions do the authors suggest?",
+      "purpose": "의미 검색 (FAISS) — 명시적 키워드 없는 개념 탐색",
+      "answer": "해당 정보를 문서에서 찾을 수 없습니다.",
+      "contexts_count": 8,
+      "elapsed_sec": 3.19,
+      "error": ""
+    }
+  ]
+}
